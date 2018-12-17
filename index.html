@@ -24,6 +24,10 @@
                 <input class="startButton" type="image" src="assets/images/start.gif">
                 <input class="creditsButton" type="image" src="assets/images/credits.gif">
                 <input class="menuButton" type="image" src="assets/images/menu.png">
+                <img id="gameover" src="assets/images/game-over.gif" loop="infinite">
+                <img id="winner" src="assets/images/winner.gif" loop="infinite">
+
+
                 <input class="EMAttack" type="image" src="assets/images/Attack.png">
                 <input class="EMBack" type="image" src="assets/images/back.png">
                 <div class="creditsDescription">
@@ -102,33 +106,33 @@
 
                     <div class="enemydiv enemyP1">
 
-                        <div class="tag_1 EMTAG1">
+                        <div id="EMTAG1" class="tag_1">
 
                         </div>
                         <input id="enemy1" class="Placement" type="image" value="e1">
                     </div>
                     <div class="enemydiv enemyP2">
-                        <div class="tag_1 EMTAG2">
+                        <div id="EMTAG2" class="tag_1">
 
                         </div>
                         <input id="enemy2" class="Placement" type="image" value="e2">
                     </div>
                     <div class="enemydiv enemyP3">
-                        <div class="tag_1 EMTAG3">
+                        <div id="EMTAG3" class="tag_1">
 
                         </div>
                         <input id="enemy3" class="Placement" type="image" value="e3">
                     </div>
 
                     <div class="enemydiv enemyP4">
-                        <div class="tag_1 EMTAG4">
+                        <div id="EMTAG4" class="tag_1">
 
                         </div>
                         <input id="enemy4" class="Placement" type="image" value="e4">
                     </div>
 
                     <div class="enemydiv enemyP5">
-                        <div class="tag_1 EMTAG5">
+                        <div id="EMTAG5" class="tag_1">
 
                         </div>
                         <input id="enemy5" class="Placement" type="image" value="e5">
@@ -153,39 +157,48 @@
 
 
     <script type="text/javascript">
+    var win = 0;
+        var player1 = {
+            HP: 500,
+            AP: 3,
+            CP: 3,
+        }
+        var player2 = {
+            HP: 350,
+            AP: 6,
+            CP: 3,
+        }
+        var player3 = {
+            HP: 200,
+            AP: 12,
+            CP: 3,
+        }
+        var player4 = {
+            HP: 100,
+            AP: 16,
+            CP: 6,
+        }
+        var duck = {
+            HP: 800,
+            AP: 40,
+            CP: 40,
+        }
+        var selectedPlayer = {
+            HP: 0,
+            AP: 0,
+            CP: 0,
+        }
+        var imgArray = [player1, player2, player3, player4, duck];
+        var PlayerChar = "";
+        var EMIndex = [0, 0, 0, 0, 0];
         $(document).ready(function () {
 
 
-            var player1 = {
-                HP: 500,
-                AP: 3,
-                CP: 3,
-            }
-            var player2 = {
-                HP: 350,
-                AP: 6,
-                CP: 3,
-            }
-            var player3 = {
-                HP: 200,
-                AP: 12,
-                CP: 3,
-            }
-            var player4 = {
-                HP: 100,
-                AP: 16,
-                CP: 6,
-            }
-            var duck = {
-                HP: 800,
-                AP: 40,
-                CP: 40,
-            }
-            var imgArray = [player1, player2, player3, player4, duck];
-            var PlayerChar = "";
+
 
             function hideAll(trueVal) {
-
+                $("#gameover").hide();
+                $("#winner").hide();
                 $(".EMBack").hide();
                 $(".EMAttack").hide();
                 $("#enemyIdle").hide();
@@ -203,31 +216,68 @@
             };
 
             function reset() {
-                player1 = {
-                    HP: 500,
-                    AP: 3,
-                    CP: 3,
+                win = 0;
+                selectedPlayer.HP = 0;
+                selectedPlayer.AP = 0;
+                selectedPlayer.CP = 0;
+
+                player1.HP = 500;
+                player1.AP = 3;
+                player1.CP = 3;
+
+                player2.HP = 350;
+                player2.AP = 6;
+                player2.CP = 3;
+
+                player3.HP = 200;
+                player3.AP = 12;
+                player3.CP = 3;
+
+                player4.HP = 100;
+                player4.AP = 16;
+                player4.CP = 6;
+
+                duck.HP = 800;
+                duck.AP = 40;
+                duck.CP = 40;
+
+                imgArray[0].HP = player1.HP
+                imgArray[0].AP = player1.AP
+                imgArray[0].CP = player1.CP
+
+                imgArray[1].HP = player2.HP
+                imgArray[1].AP = player2.AP
+                imgArray[1].CP = player2.CP
+
+                imgArray[2].HP = player3.HP
+                imgArray[2].AP = player3.AP
+                imgArray[2].CP = player3.CP
+
+                imgArray[3].HP = player4.HP
+                imgArray[3].AP = player4.AP
+                imgArray[3].CP = player4.CP
+
+                imgArray[4].HP = duck.HP
+                imgArray[4].AP = duck.AP
+                imgArray[4].CP = duck.CP
+
+                for(i = 0; i != EMIndex.length; i++){
+                    EMIndex[i] = 0;
                 }
-                player2 = {
-                    HP: 350,
-                    AP: 6,
-                    CP: 3,
-                }
-                player3 = {
-                    HP: 200,
-                    AP: 12,
-                    CP: 3,
-                }
-                player4 = {
-                    HP: 100,
-                    AP: 16,
-                    CP: 6,
-                }
-                duck = {
-                    HP: 800,
-                    AP: 40,
-                    CP: 40,
-                }
+                console.log("hi");
+
+                console.log("my rehp" + selectedPlayer.HP);
+                console.log("my reap" + selectedPlayer.AP);
+
+                console.log("m" + imgArray[0].HP);
+                console.log("my" + imgArray[0].AP);
+                console.log("m" + imgArray[0].HP);
+                console.log("m" + imgArray[0].AP);
+                console.log("my" + imgArray[0].HP);
+                console.log("y " + imgArray[0].AP);
+                console.log("s" + imgArray[0].HP);
+                console.log("p" + imgArray[0].AP);
+
             };
 
             function startUp() {
@@ -249,35 +299,9 @@
                 $(".tag4").append("<p>" + "AP: " + imgArray[3].AP + "</p>");
                 $(".tag4").append("<p>" + "CP: " + imgArray[3].CP + "</p>");
 
-
-
-
-
             };
 
-            function EMstartUp(EMNumber) {
-                var ArrayIndex = (EMNumber);
-                console.log(EMNumber);
-                switch (EMNumber) {
-                    case '1':
-                        $(".EMTAG1").append("<p>" + "HP: " + imgArray[0].HP + "</p>");
-                        $(".EMTAG1").append("<p>" + "AP: " + imgArray[0].AP + "</p>");
-                        $(".EMTAG1").append("<p>" + "CP: " + imgArray[0].CP + "</p>");
-                        break;
-                    case '2':
-                    $(".EMTAG2").append("<p>" + "HP: " + imgArray[1].HP + "</p>");
-                        $(".EMTAG2").append("<p>" + "AP: " + imgArray[1].AP + "</p>");
-                        $(".EMTAG2").append("<p>" + "CP: " + imgArray[1].CP + "</p>");                        break;
-                    case '3':
-                        break;
-                    case '4':
-                        break;
-                    case '5':
-                        break;
-                }
 
-
-            };
 
 
             function CharacterPlacement(selectedCharacter) {
@@ -293,7 +317,9 @@
                     'Placement enemy3',
                     'Placement enemy4', 'Placement enemy5'
                 ];
-
+                selectedPlayer.HP = 0;
+                selectedPlayer.AP = 0;
+                selectedPlayer.CP = 0;
 
 
 
@@ -303,6 +329,9 @@
                         $(".CharPlacement").append(
                             '<input id="p1Placement" class="Placement" type="image" src=' +
                             idleAnimation[0] + '>');
+                        selectedPlayer.HP = imgArray[0].HP
+                        selectedPlayer.AP = imgArray[0].AP
+                        selectedPlayer.CP = imgArray[0].CP
 
                         break;
                     case 'p2':
@@ -310,6 +339,9 @@
                         $(".CharPlacement").append(
                             '<input id="p1Placement" class="Placement" type="image" src=' +
                             idleAnimation[1] + '>');
+                        selectedPlayer.HP = imgArray[1].HP
+                        selectedPlayer.AP = imgArray[1].AP
+                        selectedPlayer.CP = imgArray[1].CP
 
                         break;
                     case 'p3':
@@ -317,6 +349,9 @@
                         $(".CharPlacement").append(
                             '<input id="p1Placement" class="Placement p_3" type="image" src=' +
                             idleAnimation[2] + '>');
+                        selectedPlayer.HP = imgArray[2].HP
+                        selectedPlayer.AP = imgArray[2].AP
+                        selectedPlayer.CP = imgArray[2].CP
 
                         break;
                     case 'p4':
@@ -324,6 +359,9 @@
                         $(".CharPlacement").append(
                             '<input id="p1Placement" class="Placement" type="image" src=' +
                             idleAnimation[3] + '>');
+                        selectedPlayer.HP = imgArray[3].HP
+                        selectedPlayer.AP = imgArray[3].AP
+                        selectedPlayer.CP = imgArray[3].CP
 
                         break;
                     case 'p5':
@@ -331,6 +369,9 @@
                         $(".CharPlacement").append(
                             '<input id="p1Placement" class="Placement" type="image" src=' +
                             idleAnimation[4] + '>');
+                        selectedPlayer.HP = imgArray[4].HP
+                        selectedPlayer.AP = imgArray[4].AP
+                        selectedPlayer.CP = imgArray[4].CP
 
                         break;
                 }
@@ -338,30 +379,57 @@
                 var randomEnemy = Math.floor(Math.random() * Math.floor(5));
                 $("#enemy1").addClass(PlayerClass[randomEnemy]);
                 $("#enemy1").attr("src", idleAnimation[randomEnemy]);
-                EMstartUp(randomEnemy);
+                $("#EMTAG1").empty();
+                $("#EMTAG1").append("<p>" + "HP: " + imgArray[randomEnemy].HP + "</p>");
+                $("#EMTAG1").append("<p>" + "AP: " + imgArray[randomEnemy].AP + "</p>");
+                $("#EMTAG1").append("<p>" + "CP: " + imgArray[randomEnemy].CP + "</p>");
+                EMIndex[0] = randomEnemy;
+                console.log("randomEnemy" + randomEnemy);
 
                 randomEnemy = Math.floor(Math.random() * Math.floor(5));
                 $("#enemy2").addClass(PlayerClass[randomEnemy]);
                 $("#enemy2").attr("src", idleAnimation[randomEnemy]);
-                EMstartUp(randomEnemy);
+                $("#EMTAG2").empty();
+                $("#EMTAG2").append("<p>" + "HP: " + imgArray[randomEnemy].HP + "</p>");
+                $("#EMTAG2").append("<p>" + "AP: " + imgArray[randomEnemy].AP + "</p>");
+                $("#EMTAG2").append("<p>" + "CP: " + imgArray[randomEnemy].CP + "</p>");
+                EMIndex[1] = randomEnemy;
+                console.log("randomEnemy" + randomEnemy);
 
                 randomEnemy = Math.floor(Math.random() * Math.floor(5));
                 $("#enemy3").addClass(PlayerClass[randomEnemy]);
                 $("#enemy3").attr("src", idleAnimation[randomEnemy]);
-                EMstartUp(randomEnemy);
+                $("#EMTAG3").empty();
+                $("#EMTAG3").append("<p>" + "HP: " + imgArray[randomEnemy].HP + "</p>");
+                $("#EMTAG3").append("<p>" + "AP: " + imgArray[randomEnemy].AP + "</p>");
+                $("#EMTAG3").append("<p>" + "CP: " + imgArray[randomEnemy].CP + "</p>");
+                EMIndex[2] = randomEnemy;
+                console.log("randomEnemy" + randomEnemy);
 
                 randomEnemy = Math.floor(Math.random() * Math.floor(5));
                 $("#enemy4").addClass(PlayerClass[randomEnemy]);
                 $("#enemy4").attr("src", idleAnimation[randomEnemy]);
-                EMstartUp(randomEnemy);
+                $("#EMTAG4").empty();
+                $("#EMTAG4").append("<p>" + "HP: " + imgArray[randomEnemy].HP + "</p>");
+                $("#EMTAG4").append("<p>" + "AP: " + imgArray[randomEnemy].AP + "</p>");
+                $("#EMTAG4").append("<p>" + "CP: " + imgArray[randomEnemy].CP + "</p>");
+                EMIndex[3] = randomEnemy;
+                console.log("randomEnemy" + randomEnemy);
 
                 randomEnemy = Math.floor(Math.random() * Math.floor(5));
                 $("#enemy5").addClass(PlayerClass[randomEnemy]);
                 $("#enemy5").attr("src", idleAnimation[randomEnemy]);
-                EMstartUp(randomEnemy);
-
+                $("#EMTAG5").empty();
+                $("#EMTAG5").append("<p>" + "HP: " + imgArray[randomEnemy].HP + "</p>");
+                $("#EMTAG5").append("<p>" + "AP: " + imgArray[randomEnemy].AP + "</p>");
+                $("#EMTAG5").append("<p>" + "CP: " + imgArray[randomEnemy].CP + "</p>");
+                EMIndex[4] = randomEnemy;
+                console.log("randomEnemy" + randomEnemy);
+                $("#p1Placement").show();
                 $("#enemyIdle").show();
                 $("#enemyAttack").hide();
+                $(".enemydiv").show();
+
 
             };
 
@@ -379,37 +447,91 @@
 
 
             startUp();
+            reset();
 
-            function EMAttack(enemy) {
+            function EMAttack(enemy, EMIndex2) {
                 $(".EMAttack").show();
                 $(".EMBack").show();
-
-
-                switch (PlayerChar) {
-                    case 'p1':
-                        imgArray[enemy].HP
-                        imgArray[enemy].AP
-                        imgArray[enemy].CP
-
-
-                        break;
-                    case 'p2':
-
-
-                        break;
-                    case 'p3':
-
-
-                        break;
-                    case 'p4':
-
-
-                        break;
-                    case 'p5':
-
-
-                        break;
-                }
+                $(".EMAttack").click(function () {
+                    imgArray[enemy].HP = imgArray[enemy].HP - selectedPlayer.AP;
+                    selectedPlayer.HP = selectedPlayer.HP - imgArray[enemy].CP;
+                    selectedPlayer.AP = (selectedPlayer.AP + 2);
+                    console.log("enemy hp" + imgArray[enemy].HP);
+                    console.log("enemy Ap" + imgArray[enemy].AP);
+                    console.log("my hp" + selectedPlayer.HP);
+                    console.log("my ap" + selectedPlayer.AP);
+                    if(selectedPlayer.HP <= 0){
+                            $("#p1Placement").hide();
+                            hideAll(true);
+                            $("#gameover").show();
+                            return;
+                        }
+                    if (EMIndex2 === 0) {
+                        $("#EMTAG1").empty();
+                        $("#EMTAG1").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
+                        $("#EMTAG1").append("<p>" + "AP: " + imgArray[enemy].AP + "</p>");
+                        $("#EMTAG1").append("<p>" + "CP: " + imgArray[enemy].CP + "</p>");
+                        if(imgArray[enemy].HP <= 0){
+                            $(".enemyP1").hide();
+                            win++;
+                            return;
+                        }
+                    }
+                    if (EMIndex2 === 1) {
+                        $("#EMTAG2").empty();
+                        $("#EMTAG2").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
+                        $("#EMTAG2").append("<p>" + "AP: " + imgArray[enemy].AP + "</p>");
+                        $("#EMTAG2").append("<p>" + "CP: " + imgArray[enemy].CP + "</p>");
+                        if(imgArray[enemy].HP <= 0){
+                            $(".enemyP2").hide();
+                            win++;
+                            return;
+                        }
+                    }
+                    if (EMIndex2 === 2) {
+                        $("#EMTAG3").empty();
+                        $("#EMTAG3").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
+                        $("#EMTAG3").append("<p>" + "AP: " + imgArray[enemy].AP + "</p>");
+                        $("#EMTAG3").append("<p>" + "CP: " + imgArray[enemy].CP + "</p>");
+                        if(imgArray[enemy].HP <= 0){
+                            $(".enemyP3").hide();
+                            win++;
+                            return;
+                        }
+                    }
+                    if (EMIndex2 === 3) {
+                        $("#EMTAG4").empty();
+                        $("#EMTAG4").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
+                        $("#EMTAG4").append("<p>" + "AP: " + imgArray[enemy].AP + "</p>");
+                        $("#EMTAG4").append("<p>" + "CP: " + imgArray[enemy].CP + "</p>");
+                        if(imgArray[enemy].HP <= 0){
+                            $(".enemyP4").hide();
+                            win++;
+                            return;
+                        }
+                    }
+                    if (EMIndex2 === 4) {
+                        $("#EMTAG5").empty();
+                        $("#EMTAG5").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
+                        $("#EMTAG5").append("<p>" + "AP: " + imgArray[enemy].AP + "</p>");
+                        $("#EMTAG5").append("<p>" + "CP: " + imgArray[enemy].CP + "</p>");
+                        if(imgArray[enemy].HP <= 0){
+                            $(".enemyP5").hide();
+                            win++;
+                            return;
+                        }
+                    }
+                    if(win === 4){
+                        hideAll(true);
+                        $("#winner").show();
+                    }
+                    
+                    return;
+                });
+                $(".EMBack").click(function () {
+                    $(".EMAttack").hide();
+                    $(".EMBack").hide();
+                });
 
             };
 
@@ -544,22 +666,27 @@
             $("#enemy1").on("click", function () {
                 console.log("enemyPlacement");
                 console.log($(this).val());
+                EMAttack(EMIndex[0], 0);
             });
             $("#enemy2").on("click", function () {
                 console.log("enemyPlacement");
                 console.log($(this).val());
+                EMAttack(EMIndex[1], 1);
             });
             $("#enemy3").on("click", function () {
                 console.log("enemyPlacement");
                 console.log($(this).val());
+                EMAttack(EMIndex[2], 2);
             });
             $("#enemy4").on("click", function () {
                 console.log("enemyPlacement");
                 console.log($(this).val());
+                EMAttack(EMIndex[3], 3);
             });
             $("#enemy5").on("click", function () {
                 console.log("enemyPlacement");
                 console.log($(this).val());
+                EMAttack(EMIndex[4], 4);
             });
 
 

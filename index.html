@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style-reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+
+        <div class="mainDisplay">
+            <div>
+                <input class="startButton" type="image" src="assets/images/start.gif">
+                <input class="creditsButton" type="image" src="assets/images/credits.gif">
+                <input class="menuButton" type="image" src="assets/images/menu.png">
+                <input class="EMAttack" type="image" src="assets/images/Attack.png">
+                <input class="EMBack" type="image" src="assets/images/back.png">
+                <div class="creditsDescription">
+                    <p>Author: DonHellsing: Dark Knight</p>
+                    <p>Author: edermunizz: Pixel Forest</p>
+                    <p>Author: ansimuz: Gothic Hero</p>
+                    <p>Author: lionheart963: wizard</p>
+                    <p>Author: Prince0fTime: duck</p>
+                    <p>Author: edermunizz: Pixel Forest</p>
+                    <p>Author: Jesse M: skeleton</p>
+                </div>
+            </div>
+            <button class="playerCharacters p1 CharButton marg" value="p1">
+                <div class="col-2 col-1-3">
+                    <div class="tag tag1">
+
+                    </div>
+                    <!-- <img src="assets/images/200x200.png" class="p_1" height="200" width="200"> -->
+                    <img src="assets/images/Idle.gif" class="p_1" loop="infinite">
+                </div>
+            </button>
+
+            <p class="description_p1 des marg">this is the dark knight</p>
+
+            <button class="playerCharacters p2 CharButton marg" value="p2">
+                <div class="col-2 col-1-3">
+                    <div class="tag tag2">
+
+                    </div>
+                    <img src="assets/images/SkeletonIdle.gif" class="p_2" loop="infinite">
+                </div>
+            </button>
+
+            <p class="description_p2 des marg">a skeleton</p>
+
+
+            <button class="playerCharacters p3 CharButton marg" value="p3">
+                <div class="col-2 col-1-3">
+                    <div class="tag tag3">
+
+                    </div>
+                    <img src="assets/images/wizardidle.gif" class="p_3">
+                </div>
+            </button>
+
+            <p class="description_p3 des marg">just evil</p>
+
+            <button class="playerCharacters p4 CharButton marg" value="p4">
+                <div class="col-2 col-1-3">
+                    <div class="tag tag3">
+
+                    </div>
+                    <img src="assets/images/gothic-hero-idle.gif" class="p_4">
+                </div>
+            </button>
+
+            <p class="description_p4 des marg">this is the hero</p>
+
+            <button class="playerCharacters p5 CharButton marg" value="p5">
+                <div class="col-2 col-1-3">
+                    <div class="tag">
+                        <p class="HP_TAG">HP: ???</p>
+                        <p class="AP_TAG">AP: ???</p>
+                        <p class="CP_TAG">CP: ???</p>
+                    </div>
+                    <img src="assets/images/duck.gif" class="p_5">
+                </div>
+            </button>
+
+            <p class="description_p5 des marg">it's just a duck</p>
+            <input id="Back" class="marg" type="image" src="assets/images/back.png">
+            <input id="select" class="marg" type="image" src="assets/images/select.png">
+            <div class="CharPlacement">
+                <div id="enemyIdle">
+
+
+                    <div class="enemydiv enemyP1">
+
+                        <div class="tag_1 EMTAG1">
+
+                        </div>
+                        <input id="enemy1" class="Placement" type="image" value="e1">
+                    </div>
+                    <div class="enemydiv enemyP2">
+                        <div class="tag_1 EMTAG2">
+
+                        </div>
+                        <input id="enemy2" class="Placement" type="image" value="e2">
+                    </div>
+                    <div class="enemydiv enemyP3">
+                        <div class="tag_1 EMTAG3">
+
+                        </div>
+                        <input id="enemy3" class="Placement" type="image" value="e3">
+                    </div>
+
+                    <div class="enemydiv enemyP4">
+                        <div class="tag_1 EMTAG4">
+
+                        </div>
+                        <input id="enemy4" class="Placement" type="image" value="e4">
+                    </div>
+
+                    <div class="enemydiv enemyP5">
+                        <div class="tag_1 EMTAG5">
+
+                        </div>
+                        <input id="enemy5" class="Placement" type="image" value="e5">
+                    </div>
+
+
+                    <!-- <div id="enemyAttack" class="attackPlacement">
+                        <input id="enemy1" class="Placement" type="image" value="e1">
+                        <input id="enemy2" class="Placement" type="image" value="e2">
+                        <input id="enemy3" class="Placement" type="image" value="e3">
+                        <input id="enemy4" class="Placement" type="image" value="e4">
+                        <input id="enemy5" class="Placement" type="image" value="e5">
+
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div id="buttons"></div>
+    <div id="myimg"></div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            var player1 = {
+                HP: 500,
+                AP: 3,
+                CP: 3,
+            }
+            var player2 = {
+                HP: 350,
+                AP: 6,
+                CP: 3,
+            }
+            var player3 = {
+                HP: 200,
+                AP: 12,
+                CP: 3,
+            }
+            var player4 = {
+                HP: 100,
+                AP: 16,
+                CP: 6,
+            }
+            var duck = {
+                HP: 800,
+                AP: 40,
+                CP: 40,
+            }
+            var imgArray = [player1, player2, player3, player4, duck];
+            var PlayerChar = "";
+
+            function hideAll(trueVal) {
+
+                $(".EMBack").hide();
+                $(".EMAttack").hide();
+                $("#enemyIdle").hide();
+                $("#enemyAttack").hide();
+                $(".des").hide();
+                $(".p_3").flip();
+                $("#Back").hide();
+                $("#select").hide();
+                $(".menuButton").hide();
+                $(".playerCharacters").hide();
+                $(".creditsDescription").hide();
+                if (trueVal === true) {
+                    $(".menuButton").show();
+                }
+            };
+
+            function reset() {
+                player1 = {
+                    HP: 500,
+                    AP: 3,
+                    CP: 3,
+                }
+                player2 = {
+                    HP: 350,
+                    AP: 6,
+                    CP: 3,
+                }
+                player3 = {
+                    HP: 200,
+                    AP: 12,
+                    CP: 3,
+                }
+                player4 = {
+                    HP: 100,
+                    AP: 16,
+                    CP: 6,
+                }
+                duck = {
+                    HP: 800,
+                    AP: 40,
+                    CP: 40,
+                }
+            };
+
+            function startUp() {
+                hideAll();
+
+                $(".tag1").append("<p>" + "HP: " + imgArray[0].HP + "</p>");
+                $(".tag1").append("<p>" + "AP: " + imgArray[0].AP + "</p>");
+                $(".tag1").append("<p>" + "CP: " + imgArray[0].CP + "</p>");
+
+                $(".tag2").append("<p>" + "HP: " + imgArray[1].HP + "</p>");
+                $(".tag2").append("<p>" + "AP: " + imgArray[1].AP + "</p>");
+                $(".tag2").append("<p>" + "CP: " + imgArray[1].CP + "</p>");
+
+                $(".tag3").append("<p>" + "HP: " + imgArray[2].HP + "</p>");
+                $(".tag3").append("<p>" + "AP: " + imgArray[2].AP + "</p>");
+                $(".tag3").append("<p>" + "CP: " + imgArray[2].CP + "</p>");
+
+                $(".tag4").append("<p>" + "HP: " + imgArray[3].HP + "</p>");
+                $(".tag4").append("<p>" + "AP: " + imgArray[3].AP + "</p>");
+                $(".tag4").append("<p>" + "CP: " + imgArray[3].CP + "</p>");
+
+
+
+
+
+            };
+
+            function EMstartUp(EMNumber) {
+                var ArrayIndex = (EMNumber);
+                console.log(EMNumber);
+                switch (EMNumber) {
+                    case '1':
+                        $(".EMTAG1").append("<p>" + "HP: " + imgArray[0].HP + "</p>");
+                        $(".EMTAG1").append("<p>" + "AP: " + imgArray[0].AP + "</p>");
+                        $(".EMTAG1").append("<p>" + "CP: " + imgArray[0].CP + "</p>");
+                        break;
+                    case '2':
+                    $(".EMTAG2").append("<p>" + "HP: " + imgArray[1].HP + "</p>");
+                        $(".EMTAG2").append("<p>" + "AP: " + imgArray[1].AP + "</p>");
+                        $(".EMTAG2").append("<p>" + "CP: " + imgArray[1].CP + "</p>");                        break;
+                    case '3':
+                        break;
+                    case '4':
+                        break;
+                    case '5':
+                        break;
+                }
+
+
+            };
+
+
+            function CharacterPlacement(selectedCharacter) {
+                var idleAnimation = ['assets/images/Idle.gif', 'assets/images/SkeletonIdle.gif',
+                    'assets/images/wizardidle.gif', 'assets/images/gothic-hero-idle.gif',
+                    'assets/images/duck.gif'
+                ];
+                var attackAnimation = ['"assets/images/Idle.gif"', '"assets/images/SkeletonIdle.gif"',
+                    '"assets/images/wizardidle.gif"', '"assets/images/gothic-hero-idle.gif"',
+                    '"assets/images/duckAT.gif"'
+                ];
+                var PlayerClass = ['Placement enemy1', 'Placement enemy2',
+                    'Placement enemy3',
+                    'Placement enemy4', 'Placement enemy5'
+                ];
+
+
+
+
+                switch (selectedCharacter) {
+                    case 'p1':
+                        console.log("in CharacterPlacement: " + selectedCharacter);
+                        $(".CharPlacement").append(
+                            '<input id="p1Placement" class="Placement" type="image" src=' +
+                            idleAnimation[0] + '>');
+
+                        break;
+                    case 'p2':
+                        console.log("in CharacterPlacement: " + selectedCharacter);
+                        $(".CharPlacement").append(
+                            '<input id="p1Placement" class="Placement" type="image" src=' +
+                            idleAnimation[1] + '>');
+
+                        break;
+                    case 'p3':
+                        console.log("in CharacterPlacement: " + selectedCharacter);
+                        $(".CharPlacement").append(
+                            '<input id="p1Placement" class="Placement p_3" type="image" src=' +
+                            idleAnimation[2] + '>');
+
+                        break;
+                    case 'p4':
+                        console.log("in CharacterPlacement: " + selectedCharacter);
+                        $(".CharPlacement").append(
+                            '<input id="p1Placement" class="Placement" type="image" src=' +
+                            idleAnimation[3] + '>');
+
+                        break;
+                    case 'p5':
+                        console.log("in CharacterPlacement: " + selectedCharacter);
+                        $(".CharPlacement").append(
+                            '<input id="p1Placement" class="Placement" type="image" src=' +
+                            idleAnimation[4] + '>');
+
+                        break;
+                }
+
+                var randomEnemy = Math.floor(Math.random() * Math.floor(5));
+                $("#enemy1").addClass(PlayerClass[randomEnemy]);
+                $("#enemy1").attr("src", idleAnimation[randomEnemy]);
+                EMstartUp(randomEnemy);
+
+                randomEnemy = Math.floor(Math.random() * Math.floor(5));
+                $("#enemy2").addClass(PlayerClass[randomEnemy]);
+                $("#enemy2").attr("src", idleAnimation[randomEnemy]);
+                EMstartUp(randomEnemy);
+
+                randomEnemy = Math.floor(Math.random() * Math.floor(5));
+                $("#enemy3").addClass(PlayerClass[randomEnemy]);
+                $("#enemy3").attr("src", idleAnimation[randomEnemy]);
+                EMstartUp(randomEnemy);
+
+                randomEnemy = Math.floor(Math.random() * Math.floor(5));
+                $("#enemy4").addClass(PlayerClass[randomEnemy]);
+                $("#enemy4").attr("src", idleAnimation[randomEnemy]);
+                EMstartUp(randomEnemy);
+
+                randomEnemy = Math.floor(Math.random() * Math.floor(5));
+                $("#enemy5").addClass(PlayerClass[randomEnemy]);
+                $("#enemy5").attr("src", idleAnimation[randomEnemy]);
+                EMstartUp(randomEnemy);
+
+                $("#enemyIdle").show();
+                $("#enemyAttack").hide();
+
+            };
+
+            function CharacterRemove() {
+                // $(".CharPlacement").empty();
+                $("#p1Placement").remove();
+                $("#enemy1").removeClass();
+                $("#enemy2").removeClass();
+                $("#enemy3").removeClass();
+                $("#enemy4").removeClass();
+                $("#enemy5").removeClass();
+
+            };
+
+
+
+            startUp();
+
+            function EMAttack(enemy) {
+                $(".EMAttack").show();
+                $(".EMBack").show();
+
+
+                switch (PlayerChar) {
+                    case 'p1':
+                        imgArray[enemy].HP
+                        imgArray[enemy].AP
+                        imgArray[enemy].CP
+
+
+                        break;
+                    case 'p2':
+
+
+                        break;
+                    case 'p3':
+
+
+                        break;
+                    case 'p4':
+
+
+                        break;
+                    case 'p5':
+
+
+                        break;
+                }
+
+            };
+
+            $(".startButton").click(function () {
+                hideAll();
+                $(".startButton").hide();
+                $(".creditsButton").hide();
+                $(".playerCharacters").show();
+                $(".menuButton").show();
+
+
+
+            });
+
+
+
+
+
+            $(".creditsButton").click(function () {
+                hideAll();
+                $(".startButton").hide();
+                $(".creditsButton").hide();
+                $(".creditsDescription").show();
+                $(".menuButton").show();
+
+            });
+
+            $(".menuButton").click(function () {
+                CharacterRemove();
+                reset();
+                hideAll();
+                $(".startButton").show();
+                $(".creditsButton").show();
+
+
+            });
+
+
+            $(".playerCharacters").click(function () {
+                PlayerChar = $(this).val();
+                console.log($(this).val() === PlayerChar);
+                console.log(PlayerChar = $(this).val());
+                console.log(PlayerChar);
+
+                if (PlayerChar == 'p1') {
+                    //for player
+                    hideAll();
+                    $(".p1").show();
+
+
+                    //for description
+                    $(".description_p1").show();
+                    $("#Back").show();
+                    $("#select").show();
+
+                    console.log("hi1");
+                }
+                if (PlayerChar == 'p2') {
+                    //for player
+                    hideAll();
+                    $(".p2").show();
+
+                    $("#select").show();
+
+
+                    //for description
+                    $(".description_p2").show();
+                    $("#Back").show();
+
+                    // $("#").empty(imgCharacters[0]);
+                    console.log("hi2");
+                }
+                if (PlayerChar == 'p3') {
+                    //for player
+                    hideAll();
+                    $(".p3").show();
+                    $("#select").show();
+
+                    //for description
+                    $(".description_p3").show();
+                    $("#Back").show();
+
+                    // $("#").empty(imgCharacters[0]);
+                    console.log("hi3");
+                }
+                if (PlayerChar == 'p4') {
+                    //for player
+                    hideAll();
+                    $(".p4").show();
+                    $("#select").show();
+
+                    //for description
+                    $(".description_p4").show();
+                    $("#Back").show();
+                    // $("#").empty(imgCharacters[0]);
+                    console.log("hi4");
+                }
+                if (PlayerChar == 'p5') {
+                    //for player
+                    hideAll();
+                    $(".p5").show();
+                    $("#select").show();
+
+                    //for description
+                    $(".description_p5").show();
+                    $("#Back").show();
+
+                    // $("#").empty(imgCharacters[0]);
+                    console.log("duck is the best!!");
+                    console.log("HP: " + imgArray[4].HP);
+                    console.log("AP: " + imgArray[4].AP);
+                    console.log("CP: " + imgArray[4].CP);
+
+                }
+
+            });
+
+            $("#select").click(function () {
+                hideAll(true);
+                console.log(PlayerChar);
+                CharacterPlacement(PlayerChar);
+                $("#enemyIdle").show();
+            });
+
+            $("#Back").click(function () {
+                hideAll(true);
+                $(".playerCharacters").show();
+
+
+            });
+
+            $("#enemy1").on("click", function () {
+                console.log("enemyPlacement");
+                console.log($(this).val());
+            });
+            $("#enemy2").on("click", function () {
+                console.log("enemyPlacement");
+                console.log($(this).val());
+            });
+            $("#enemy3").on("click", function () {
+                console.log("enemyPlacement");
+                console.log($(this).val());
+            });
+            $("#enemy4").on("click", function () {
+                console.log("enemyPlacement");
+                console.log($(this).val());
+            });
+            $("#enemy5").on("click", function () {
+                console.log("enemyPlacement");
+                console.log($(this).val());
+            });
+
+
+
+        });
+    </script>
+</body>
+
+</html>

@@ -453,9 +453,9 @@
                 $(".EMAttack").show();
                 $(".EMBack").show();
                 $(".EMAttack").click(function () {
-                    imgArray[enemy].HP = imgArray[enemy].HP - selectedPlayer.AP;
-                    selectedPlayer.HP = selectedPlayer.HP - imgArray[enemy].CP;
-                    selectedPlayer.AP = (selectedPlayer.AP + 2);
+                    imgArray[enemy].HP -= selectedPlayer.AP;
+                    selectedPlayer.HP -= imgArray[enemy].CP;
+                    selectedPlayer.AP += 2;
                     console.log("enemy hp" + imgArray[enemy].HP);
                     console.log("enemy Ap" + imgArray[enemy].AP);
                     console.log("my hp" + selectedPlayer.HP);
@@ -466,6 +466,7 @@
                             $("#gameover").show();
                             return;
                         }
+
                     if (EMIndex2 === 0) {
                         $("#EMTAG1").empty();
                         $("#EMTAG1").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
@@ -477,6 +478,7 @@
                             return;
                         }
                     }
+
                     if (EMIndex2 === 1) {
                         $("#EMTAG2").empty();
                         $("#EMTAG2").append("<p>" + "HP: " + imgArray[enemy].HP + "</p>");
